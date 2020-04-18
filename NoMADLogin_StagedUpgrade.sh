@@ -13,7 +13,7 @@ ScriptPath="/var/db/.nomadLogin_StagedUpgrade.sh"
 PlistPath="/Library/LaunchDaemons/com.NoLoAD.StagedAppleUpgrade.plist"
 
 # Check if uninstall arg was passed
-if [[ $1 == "uninstall" ]]; then
+if [[ $1 == "uninstall" || $4 == "uninstall" ]]; then
     echo "removing NoMADLoAD_AppleStagedUpdates..."
     rm ${ScriptPath}
     rm ${PlistPath}
