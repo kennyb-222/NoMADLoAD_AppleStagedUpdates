@@ -2,7 +2,7 @@
 # Disable NoMAD Login AD only during staged macOS updates and upgrades requiring reboot
 ## Allows macOS to complete the "last mile" user-level updates
 ## Allows autologin of the user logged in before the update
-## Restores NoMAD Login authorizationdb at the next restart folowing the update
+## Restores NoMAD Login authorizationdb after the OS update is complete
 #
 # Source: https://github.com/kennyb-222/NoMADLoAD_AppleStagedUpdates/
 # Author: Kenny Botelho
@@ -61,6 +61,13 @@ chmod 755 /Library/LaunchDaemons/com.NoLoAD.PostAppleUpgradeRestore.plist
 cat > /var/db/.nomadLogin_revertAuthdb.sh << \E0F
 #!/bin/bash
 # NoMAD Login AD revert loginwindow
+
+# Wait up to 90 miinutes to complete the Apple Upgrade
+c=0
+while [[ -f /var/db/.AppleUpgrade ]]; do
+    sleep 60
+((c++)) && ((c==90)) && c=0 && break
+done
 
 if [[ ! -f /var/db/.AppleUpgrade && ! -f /var/db/.StagedAppleUpgrade && \
         -z $(/usr/local/bin/authchanger -print | grep "NoMADLoginAD") ]]; then
