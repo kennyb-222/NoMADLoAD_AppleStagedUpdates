@@ -1,5 +1,4 @@
 #!/bin/bash
-#
 # Disable NoMAD Login AD only during staged macOS updates and upgrades requiring reboot
 ## Allows macOS to complete the "last mile" user-level updates
 ## Allows autologin of the user logged in before the update
