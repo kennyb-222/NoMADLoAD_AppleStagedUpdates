@@ -11,8 +11,8 @@ This script will engage when macOS updates or upgrades are staged on the device
 
 ### How to install
 
-`sudo /bin/sh /path/to/.sh`
+`sudo /bin/bash /path/to/NoMADLogin_StagedUpgrade.sh`
 
 ### How to uninstall
 
-`sudo /bin/sh /path/to/.sh "uninstall"`
+`sudo /bin/bash /path/to/NoMADLogin_StagedUpgrade.sh "uninstall"`
