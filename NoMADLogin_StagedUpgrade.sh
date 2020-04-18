@@ -13,6 +13,19 @@
 ScriptPath="/var/db/.nomadLogin_StagedUpgrade.sh"
 PlistPath="/Library/LaunchDaemons/com.NoLoAD.StagedAppleUpgrade.plist"
 
+# Check if uninstall arg was passed
+if [[ $1 == "uninstall" ]]; then
+    echo "removing NoMADLoAD_AppleStagedUpdates..."
+    rm ${ScriptPath}
+    rm ${PlistPath}
+    rm /var/db/.nomadLogin_authdb_bkp.xml
+    rm /var/db/.nomadLogin_revertAuthdb.sh
+    rm /Library/LaunchDaemons/com.NoLoAD.PostAppleUpgradeRestore.plist
+    /bin/launchctl remove com.NoLoAD.StagedAppleUpgrade
+    /bin/launchctl remove com.NoLoAD.PostAppleUpgradeRestore
+    exit 0
+fi
+
 # NoLoAD StagedUpgrade Script
 cat > ${ScriptPath} << \EOF
 #!/bin/bash
