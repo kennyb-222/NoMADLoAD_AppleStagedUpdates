@@ -8,6 +8,7 @@ This script will automatically engage when macOS updates or upgrades are staged 
 - Disables NoMAD Login only during staged macOS updates and upgrades requiring reboot
 - Allows macOS to complete the "last mile" user-level updates
 - Allows autologin of the user logged in previously before the update
+- Prevents macOS from resetting the loginwindow back to default settings across upgrades/updates (Preserves NoMAD Login)
 - Restores authorizationdb settings after the OS update is complete (restores NoMADLogin functionality)
 
 ### How to install
