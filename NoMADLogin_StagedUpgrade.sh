@@ -6,7 +6,7 @@
 #
 # Source: https://github.com/kennyb-222/NoMADLoAD_AppleStagedUpdates/
 # Author: Kenny Botelho
-# Version: 0.1
+# Version: 1.0
 
 # Set variables
 ScriptPath="/var/db/.nomadLogin_StagedUpgrade.sh"
@@ -69,8 +69,15 @@ while [[ -f /var/db/.AppleUpgrade ]]; do
 ((c++)) && ((c==90)) && c=0 && break
 done
 
+# Get the authorizationdb values for comparison
+curr_authdb=$(/usr/bin/security -q authorizationdb read system.login.console | \
+                sed '1,/<array>/d;/<\/array>/,$d')
+bkp_authdb=$(cat /var/db/.nomadLogin_authdb_bkp.xml | \
+                sed '1,/<array>/d;/<\/array>/,$d')
+
+# If upgrade is complete, reset authorizationdb
 if [[ ! -f /var/db/.AppleUpgrade && ! -f /var/db/.StagedAppleUpgrade && \
-        -z $(/usr/bin/security -q authorizationdb read system.login.console | grep "NoMADLoginAD") ]]; then
+        ${curr_authdb} != ${bkp_authdb} ]]; then
     # Restore previous loginwindow settings
     /usr/bin/security authorizationdb write system.login.console < /var/db/.nomadLogin_authdb_bkp.xml
     # Cleanup
@@ -88,8 +95,8 @@ chmod +x /var/db/.nomadLogin_revertAuthdb.sh
 exit
 EOF
 
-# Allow script execution
-chmod +x ${ScriptPath}
+# Set script permissions
+chmod 755 ${ScriptPath}
 
 # Create LaunchDaemon to watch for "Stagged Apple Upgrades"
 cat > ${PlistPath} << \EOF
