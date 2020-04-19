@@ -16,3 +16,6 @@ This script will engage when macOS updates or upgrades are staged on the device
 ### How to uninstall
 
 `sudo /bin/bash /path/to/NoMADLogin_StagedUpgrade.sh "uninstall"`
+
+##### Notes
+Tested on both major (10.14.x - 10.15.x) and minor (10.15 - 10.15.x) macOS release updates
