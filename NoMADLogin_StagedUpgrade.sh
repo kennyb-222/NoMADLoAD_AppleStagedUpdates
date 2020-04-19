@@ -32,7 +32,7 @@ cat > ${ScriptPath} << \EOF
 
 # Backup loginwindow settings and revert to macOS default
 /usr/bin/security authorizationdb read system.login.console > /var/db/.nomadLogin_authdb_bkp.xml
-/usr/local/bin/authchanger -reset
+rm /var/db/auth.db
 
 # Create LaunchDaemon plist
 cat > /Library/LaunchDaemons/com.NoLoAD.PostAppleUpgradeRestore.plist << \E0F
@@ -70,7 +70,7 @@ while [[ -f /var/db/.AppleUpgrade ]]; do
 done
 
 if [[ ! -f /var/db/.AppleUpgrade && ! -f /var/db/.StagedAppleUpgrade && \
-        -z $(/usr/local/bin/authchanger -print | grep "NoMADLoginAD") ]]; then
+        -z $(/usr/bin/security -q authorizationdb read system.login.console | grep "NoMADLoginAD") ]]; then
     # Restore previous loginwindow settings
     /usr/bin/security authorizationdb write system.login.console < /var/db/.nomadLogin_authdb_bkp.xml
     # Cleanup
