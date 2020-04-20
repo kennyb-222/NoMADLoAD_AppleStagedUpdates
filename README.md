@@ -4,6 +4,8 @@ Currently NoMAD Login does not support the supression of it's loginwindow plugin
 
 This script will automatically engage when macOS updates or upgrades are staged on the device, allowing macOS to complete the entire "AppleUpgrade" process.
 
+### Update: Now supports Jamf Connect Login
+
 ### What does it do?
 - Disables NoMAD Login only during staged macOS updates and upgrades requiring reboot
 - Allows macOS to complete the "last mile" user-level updates
@@ -13,11 +15,14 @@ This script will automatically engage when macOS updates or upgrades are staged 
 
 ### How to install
 
-`sudo /bin/bash /path/to/NoMADLogin_StagedUpgrade.sh`
+`sudo /bin/bash /path/to/NoMADLogin_UpgradeHook.sh`
 
 ### How to uninstall
 
-`sudo /bin/bash /path/to/NoMADLogin_StagedUpgrade.sh "uninstall"`
+`sudo /bin/bash /private/var/db/.AppleUpgradeHooks.sh "uninstall"`
 
 ##### Notes
 Tested on both major (10.14.x - 10.15.x) and minor (10.15 - 10.15.x) macOS release updates
+
+This was created from the "macOSUpgradeHooks" project
+https://github.com/kennyb-222/macOSUpgradeHooks
