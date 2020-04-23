@@ -60,7 +60,7 @@ return 0
 
 Install() {
     # Copy script to destination path
-    cp $0 ${ScriptPath}
+    cp "$0" ${ScriptPath}
     
     # Create LaunchDaemon to watch for "Stagged Apple Upgrades"
     cat > ${PlistPath} << \EOF
