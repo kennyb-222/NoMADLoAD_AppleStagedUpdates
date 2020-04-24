@@ -55,7 +55,7 @@ return 0
 }
 
 #####################################
-#   DO NOT MIDIFY BELOW THIS LINE   #
+#   DO NOT MODIFY BELOW THIS LINE   #
 #####################################
 
 Install() {
